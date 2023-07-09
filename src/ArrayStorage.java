@@ -11,8 +11,14 @@ public class ArrayStorage {
         Arrays.fill(storage, 0, length - 1, null);
     }
 
-    void save(Resume r) {
-
+    void save(Resume resume) {
+        int countResume = size();
+        int lengthStorage = storage.length;
+        if (countResume == lengthStorage) {
+            System.out.println("Резюме не добавлено, т.к. база данных переполнена!");
+            return;
+        }
+        storage[countResume] = resume;
     }
 
     Resume get(String uuid) {

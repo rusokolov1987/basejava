@@ -15,7 +15,9 @@ public class ArrayStorage {
         int countResumes = size();
         int lengthStorage = storage.length;
         if (countResumes == lengthStorage) {
-            System.out.println("Резюме не добавлено, т.к. база данных переполнена!");
+            return;
+        }
+        if (get(resume.uuid) != null && countResumes != 0) {
             return;
         }
         storage[countResumes] = resume;

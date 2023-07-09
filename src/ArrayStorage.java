@@ -23,7 +23,7 @@ public class ArrayStorage {
     Resume get(String uuid) {
         int countResumes = size();
         for (int i = 0; i < countResumes; i++) {
-            if (storage[i].toString().equals(uuid)) {
+            if (storage[i].uuid.equals(uuid)) {
                 return storage[i];
             }
         }
@@ -33,7 +33,7 @@ public class ArrayStorage {
     void delete(String uuid) {
         int countResumes = size();
         for (int i = 0; i < countResumes; i++) {
-            if (storage[i].toString().equals(uuid)) {
+            if (storage[i].uuid.equals(uuid)) {
                 System.arraycopy(storage, i + 1, storage, i, countResumes - i);
                 break;
             }

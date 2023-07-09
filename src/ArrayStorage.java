@@ -19,7 +19,6 @@ public class ArrayStorage {
             return;
         }
         storage[countResume] = resume;
-        System.out.println("Резюме добавлено!");
     }
 
     Resume get(String uuid) {
@@ -33,6 +32,16 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
+        int length = size();
+        if (length == 0) {
+            return;
+        }
+        for (int i = 0; i < length; i++) {
+            if (storage[i].toString().equals(uuid)) {
+                System.arraycopy(storage, i + 1, storage, i, length - i);
+                break;
+            }
+        }
     }
 
     /**

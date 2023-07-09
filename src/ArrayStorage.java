@@ -12,18 +12,18 @@ public class ArrayStorage {
     }
 
     void save(Resume resume) {
-        int countResume = size();
+        int countResumes = size();
         int lengthStorage = storage.length;
-        if (countResume == lengthStorage) {
+        if (countResumes == lengthStorage) {
             System.out.println("Резюме не добавлено, т.к. база данных переполнена!");
             return;
         }
-        storage[countResume] = resume;
+        storage[countResumes] = resume;
     }
 
     Resume get(String uuid) {
-        int size = size();
-        for (int i = 0; i < size; i++) {
+        int countResumes = size();
+        for (int i = 0; i < countResumes; i++) {
             if (storage[i].toString().equals(uuid)) {
                 return storage[i];
             }
@@ -32,13 +32,13 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-        int length = size();
-        if (length == 0) {
+        int countResumes = size();
+        if (countResumes == 0) {
             return;
         }
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < countResumes; i++) {
             if (storage[i].toString().equals(uuid)) {
-                System.arraycopy(storage, i + 1, storage, i, length - i);
+                System.arraycopy(storage, i + 1, storage, i, countResumes - i);
                 break;
             }
         }
@@ -48,18 +48,18 @@ public class ArrayStorage {
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        int length = size();
-        return Arrays.copyOf(storage, length);
+        int countResumes = size();
+        return Arrays.copyOf(storage, countResumes);
     }
 
     int size() {
-        int length = 0;
+        int countResumes = 0;
         for (Resume resume : storage) {
             if (resume == null) {
                 break;
             }
-            length++;
+            countResumes++;
         }
-        return length;
+        return countResumes;
     }
 }

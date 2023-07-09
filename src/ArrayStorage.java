@@ -14,7 +14,7 @@ public class ArrayStorage {
     void save(Resume resume) {
         int countResumes = size();
         int lengthStorage = storage.length;
-        if (get(resume.uuid) != null && countResumes != 0 || countResumes == lengthStorage) {
+        if (get(resume.uuid) != null || countResumes == lengthStorage) {
             return;
         }
         storage[countResumes] = resume;

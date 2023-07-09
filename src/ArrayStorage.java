@@ -33,9 +33,6 @@ public class ArrayStorage {
 
     void delete(String uuid) {
         int countResumes = size();
-        if (countResumes == 0) {
-            return;
-        }
         for (int i = 0; i < countResumes; i++) {
             if (storage[i].toString().equals(uuid)) {
                 System.arraycopy(storage, i + 1, storage, i, countResumes - i);

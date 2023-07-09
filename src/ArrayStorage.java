@@ -19,6 +19,7 @@ public class ArrayStorage {
             return;
         }
         storage[countResume] = resume;
+        System.out.println("Резюме добавлено!");
     }
 
     Resume get(String uuid) {
@@ -33,10 +34,17 @@ public class ArrayStorage {
      */
     Resume[] getAll() {
         int length = size();
-        return Arrays.copyOf(storage, length - 1);
+        return Arrays.copyOf(storage, length);
     }
 
     int size() {
-        return 0;
+        int length = 0;
+        for (Resume resume : storage) {
+            if (resume == null) {
+                break;
+            }
+            length++;
+        }
+        return length;
     }
 }

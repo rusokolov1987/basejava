@@ -7,7 +7,8 @@ import java.util.Arrays;
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    private Resume[] storage = new Resume[10000];
+    private static final int STORAGE_LIMIT = 100000;
+    private final Resume[] storage = new Resume[STORAGE_LIMIT];
     private int size;
 
     public void clear() {
@@ -16,17 +17,14 @@ public class ArrayStorage {
     }
 
     public void save(Resume resume) {
-        int length = storage.length;
-        if (length == size) {
-            System.out.println("БД переполнена!");
-            return;
-        }
         int index = getIndex(resume.getUuid());
-        if (isExist(index)) {
+        if (STORAGE_LIMIT == size) {
+            System.out.println("БД переполнена!");
+        } else if (isExist(index)) {
             System.out.println("Резюме " + resume.getUuid() + " уже есть в БД!");
-            return;
+        } else {
+            storage[size++] = resume;
         }
-        storage[size++] = resume;
     }
 
     public Resume get(String uuid) {
@@ -79,6 +77,6 @@ public class ArrayStorage {
     }
 
     private boolean isExist(int index) {
-        return index > -1 ? true : false;
+        return index > -1;
     }
 }

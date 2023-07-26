@@ -42,17 +42,24 @@ public class ArrayStorage {
             System.out.println("Резюме " + uuid + " нет в БД!");
             return;
         }
-        System.arraycopy(storage, index + 1, storage, index, size - 1 - index);
+        storage[index] = storage[size - 1];
+        storage[size - 1] = null;
         size--;
     }
 
     public void update(Resume resume, String uuid) {
         int index = getIndex(resume.getUuid());
         if (!isExist(index)) {
-            System.out.println("Резюме " + uuid + " нет в БД!");
+            System.out.println("Резюме " + resume.getUuid() + " нет в БД!");
             return;
         }
-        storage[index].setUuid(uuid);
+        if (!isExist(getIndex(uuid))) {
+            resume = new Resume();
+            resume.setUuid(uuid);
+            storage[index] = resume;
+            return;
+        }
+        System.out.println("Резюме " + resume.getUuid() + " есть в БД!");
     }
 
     /**
@@ -67,9 +74,8 @@ public class ArrayStorage {
     }
 
     private int getIndex(String uuid) {
-        int length = size();
-        for (int i = 0; i < length; i++) {
-            if (storage[i].getUuid().equals(uuid)) {
+        for (int i = 0; i < storage.length; i++) {
+            if (storage[i] != null && storage[i].getUuid().equals(uuid)) {
                 return i;
             }
         }

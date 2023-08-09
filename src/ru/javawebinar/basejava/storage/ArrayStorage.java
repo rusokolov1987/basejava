@@ -6,7 +6,7 @@ import java.util.Arrays;
 /**
  * Array based storage for Resumes
  */
-public class ArrayStorage {
+public class ArrayStorage implements Storage {
     private static final int STORAGE_LIMIT = 100000;
     private final Resume[] storage = new Resume[STORAGE_LIMIT];
     private int size;
@@ -47,19 +47,14 @@ public class ArrayStorage {
         size--;
     }
 
-    public void update(Resume resume, String uuid) {
+    public void update(Resume resume) {
         int index = getIndex(resume.getUuid());
         if (!isExist(index)) {
             System.out.println("Резюме " + resume.getUuid() + " нет в БД!");
-            return;
         }
-        if (!isExist(getIndex(uuid))) {
-            resume = new Resume();
-            resume.setUuid(uuid);
+        else {
             storage[index] = resume;
-            return;
         }
-        System.out.println("Резюме " + resume.getUuid() + " есть в БД!");
     }
 
     /**
